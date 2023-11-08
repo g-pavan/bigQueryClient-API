@@ -1,0 +1,112 @@
+swagger: '2.0'
+info:
+  title: BigQuery Client API
+  description: An API for interacting with Google BigQuery using Flask.
+  version: 1.0.0
+
+paths:
+  /connect_to_project:
+    get:
+      summary: Connect to a BigQuery project.
+      parameters:
+        - name: project_id
+          in: query
+          type: string
+          required: true
+          description: The BigQuery project ID.
+      responses:
+        '200':
+          description: Successful connection to the BigQuery project.
+        '400':
+          description: Bad Request. The request is malformed or contains invalid parameters.
+        '404':
+          description: Not Found. The requested resource or endpoint does not exist.
+
+  /connect_to_dataset:
+    get:
+      summary: Connect to a BigQuery dataset.
+      parameters:
+        - name: dataset_id
+          in: query
+          type: string
+          required: true
+          description: The BigQuery dataset ID.
+      responses:
+        '200':
+          description: Successful connection to the BigQuery dataset.
+        '400':
+          description: Bad Request. The request is malformed or contains invalid parameters.
+        '404':
+          description: Not Found. The requested resource or endpoint does not exist.
+
+  /connect_to_table:
+    get:
+      summary: Connect to a BigQuery table.
+      parameters:
+        - name: table_id
+          in: query
+          type: string
+          required: true
+          description: The BigQuery table ID.
+      responses:
+        '200':
+          description: Successful connection to the BigQuery table.
+        '400':
+          description: Bad Request. The request is malformed or contains invalid parameters.
+        '404':
+          description: Not Found. The requested resource or endpoint does not exist.
+
+  /get_table_data:
+    get:
+      summary: Get data from a specified BigQuery table.
+      parameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          default: 10
+          description: The maximum number of rows to retrieve.
+      responses:
+        '200':
+          description: Successful retrieval of data from the specified BigQuery table.
+        '400':
+          description: Bad Request. The request is malformed or contains invalid parameters.
+        '404':
+          description: Not Found. The requested resource or endpoint does not exist.
+
+
+  /filter_table_data:
+    get:
+      summary: Filter data from a table based on dynamic filters.
+      parameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: The maximum number of rows to retrieve. If not specified, all rows are returned.
+        - name: filters
+          in: query
+          type: object
+          required: false
+          description: Dynamic filters to apply to the table data as a JSON object.
+      responses:
+        '200':
+          description: Successful response with filtered data.
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                description: Indicates the success of the request.
+                example: true
+              data:
+                type: array
+                description: List of records from the filtered table.
+                items:
+                  type: object  # Adjust based on the structure of your records
+                  properties:
+                    # Define properties based on your record structure
+        '400':
+          description: Bad Request. The request is malformed or contains invalid parameters.
+        '404':
+          description: Not Found. The requested resource or endpoint does not exist.

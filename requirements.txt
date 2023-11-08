@@ -1,0 +1,6 @@
+pandas
+pandas-gbq
+pyyaml
+google-cloud-bigquery
+flask
+flasgger
