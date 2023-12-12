@@ -2,11 +2,17 @@ from google.cloud import bigquery
 import pandas as pd
 
 class BigQueryConnector:
-    def __init__(self):
+    def __init__(self, project_id=None, dataset_id=None, table_id=None):
         self.client = None
         self.dataset = None
         self.table = None
         self.df = None
+
+        # Initialize the connector with provided project, dataset, and table IDs
+        if project_id and dataset_id and table_id:
+            self.connect_to_project(project_id)
+            self.connect_to_dataset(dataset_id)
+            self.connect_to_table(table_id)
 
     def connect_to_project(self, project_id):
         self.client = bigquery.Client(project=project_id)

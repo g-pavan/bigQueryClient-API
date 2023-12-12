@@ -1,27 +1,17 @@
 swagger: '2.0'
 info:
   title: BigQuery Client API
-  description: |
-    An API for interacting with Google BigQuery using Flask.
-
-    **Authentication Instructions:**
-    1. Click the 'Authorize' button.
-    2. Enter the API token obtained from the login endpoint.
+  description: An API for interacting with Google BigQuery using Flask.
   version: 1.0.0
 
 securityDefinitions:
-  apiKey:
-    type: apiKey
-    name: Authorization
-    in: header
-    description: Enter your API token obtained from the login endpoint.
+  - apiKey:
+      type: apiKey
+      name: Authorization
+      in: header
 
-
-security:
-  - apiKey: []
-
-paths:          
-  /connect/project:
+paths:
+  /connect_to_project:
     get:
       summary: Connect to a BigQuery project.
       parameters:
@@ -38,7 +28,7 @@ paths:
         '404':
           description: Not Found. The requested resource or endpoint does not exist.
 
-  /connect/dataset:
+  /connect_to_dataset:
     get:
       summary: Connect to a BigQuery dataset.
       parameters:
@@ -55,7 +45,7 @@ paths:
         '404':
           description: Not Found. The requested resource or endpoint does not exist.
 
-  /connect/table:
+  /connect_to_table:
     get:
       summary: Connect to a BigQuery table.
       parameters:
@@ -72,7 +62,7 @@ paths:
         '404':
           description: Not Found. The requested resource or endpoint does not exist.
 
-  /data/get_table_data:
+  /get_table_data:
     get:
       summary: Get data from a specified BigQuery table.
       parameters:
@@ -90,7 +80,8 @@ paths:
         '404':
           description: Not Found. The requested resource or endpoint does not exist.
 
-  /data/filter_table_data:
+
+  /filter_table_data:
     get:
       summary: Filter data from a table based on dynamic filters.
       parameters:
@@ -117,36 +108,6 @@ paths:
               data:
                 type: array
                 description: List of records from the filtered table.
-                items:
-                  type: object  # Adjust based on the structure of your records
-                  properties:
-                    # Define properties based on your record structure
-        '400':
-          description: Bad Request. The request is malformed or contains invalid parameters.
-        '404':
-          description: Not Found. The requested resource or endpoint does not exist.
-  /data/filter_row_data:
-    get:
-      summary: Filter rows based on a search value.
-      parameters:
-        - name: search_value
-          in: query
-          type: string
-          required: true
-          description: The value to search for in all rows.
-      responses:
-        '200':
-          description: Successful response with matching rows.
-          schema:
-            type: object
-            properties:
-              success:
-                type: boolean
-                description: Indicates the success of the request.
-                example: true
-              data:
-                type: array
-                description: List of records matching the search value.
                 items:
                   type: object  # Adjust based on the structure of your records
                   properties:
