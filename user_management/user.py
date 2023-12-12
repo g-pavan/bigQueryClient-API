@@ -1,7 +1,17 @@
 import os
 from flask import redirect, url_for
 
-BASE_URL = os.environ.get('BASE_URL', 'http://localhost:5000')
+class UserManager:
+    def __init__(self):
+        self.user_name = None
+        self.user = None
+    
+    def set_user_name(self, user_name):
+        self.user_name = user_name
+    
+    def get_user_name(self):
+        return self.user_name
+
 
 class User:
     def __init__(self):

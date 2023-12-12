@@ -6,3 +6,4 @@ flask
 flasgger
 msal
 Flask-JWT-Extended
+flask-login
